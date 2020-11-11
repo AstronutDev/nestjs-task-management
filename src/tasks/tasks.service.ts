@@ -30,6 +30,12 @@ export class TasksService {
         return task
     }
 
+    editTask(id: string, status: TaskStatus): Task {
+        let task = this.getTaskById(id)
+        task.status = status
+        return task
+    }
+
     deleteTask(id: string) {
         let taskIndex = this.tasks.findIndex(task => task.id === id)
         if (!taskIndex) {
