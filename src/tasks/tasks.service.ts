@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { Task, TaskStatus } from './task.model';
 // import * as uuid from 'uuid/v1'
 import { v4 as uuidv4 } from 'uuid'
@@ -28,5 +28,14 @@ export class TasksService {
 
         this.tasks.push(task)
         return task
+    }
+
+    deleteTask(id: string) {
+        let taskIndex = this.tasks.findIndex(task => task.id === id)
+        if (!taskIndex) {
+            throw new NotFoundException('not found task')
+        } else {
+            this.tasks.splice(taskIndex, 1)
+        }
     }
 }
