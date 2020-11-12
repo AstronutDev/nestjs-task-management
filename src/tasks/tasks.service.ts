@@ -32,7 +32,12 @@ export class TasksService {
     }
 
     getTaskById(id: string): Task {
-        return this.tasks.find(task => task.id  === id)
+        let task = this.tasks.find(task => task.id  === id)
+        if (!task) {
+            throw new NotFoundException()
+        } else {
+            return task
+        }
     }
 
     createTask(createTaskDto: CreateTaskDto): Task {
