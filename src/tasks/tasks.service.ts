@@ -32,11 +32,11 @@ export class TasksService {
     }
 
     getTaskById(id: string): Task {
-        let task = this.tasks.find(task => task.id  === id)
-        if (!task) {
+        let foundtask = this.tasks.find(task => task.id  === id)
+        if (!foundtask) {
             throw new NotFoundException()
         } else {
-            return task
+            return foundtask
         }
     }
 
@@ -59,12 +59,8 @@ export class TasksService {
         return task
     }
 
-    deleteTask(id: string) {
-        let taskIndex = this.tasks.findIndex(task => task.id === id)
-        if (!taskIndex) {
-            throw new NotFoundException('not found task')
-        } else {
-            this.tasks.splice(taskIndex, 1)
-        }
+    deleteTask(id: string): void {
+        let foundTask = this.getTaskById(id)
+        this.tasks = this.tasks.filter(task => task.id !== foundTask.id)
     }
 }
