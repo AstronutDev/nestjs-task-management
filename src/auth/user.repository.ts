@@ -9,7 +9,7 @@ export class UserRepository extends Repository<User> {
     async signUp(authCredentialDto: AuthCredentialsDto): Promise<void> {
         let {username, password} = authCredentialDto
 
-        let user = new User()
+        let user = this.create()
         user.username = username
         user.salt = await bcrypt.genSalt(10)
         user.password = await this.hashPassword(password, user.salt)
