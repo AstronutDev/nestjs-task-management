@@ -43,7 +43,7 @@ export class TasksService {
         id: number,
         user: User
     ): Promise<Object> {
-       const result = await this.taskRepository.delete({ id, user})
+       const result = await this.taskRepository.delete({ id, userId: user.id})
        if (result.affected === 0) {
          throw new NotFoundException()
        }
