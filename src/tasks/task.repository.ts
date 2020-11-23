@@ -53,9 +53,5 @@ export class TaskRepository extends Repository<Task> {
         } catch (error) {
             throw new InternalServerErrorException()
         }
-     
-
-    
-    
     }
 }
